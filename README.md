@@ -95,7 +95,7 @@ SmartRoute-OSM/
 
 ```bash
 # Clone o repositório
-git clone https://github.com/SEU_USUARIO/SmartRoute-OSM.git
+git clone https://github.com/cauaenzo/SmartRoute-OSM.git
 cd SmartRoute-OSM
 
 # Crie e ative um virtualenv
