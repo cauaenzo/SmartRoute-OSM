@@ -36,7 +36,7 @@ Este repositório contém todo o pipeline para:
 | **Dijkstra** | 1 890,27 | 961 | 5,95 | – |
 | **A* (Haversine)** | 1 890,27 | **81** | 4,94 | **91,57 %** menos nós explorados |
 
-*% de redução calculada como \((\text{Nós Dijkstra} - \text{Nós A*}) / \text{Nós Dijkstra} \times 100\).
+*% de redução calculada como \((\text{Nós Dijkstra} - \text{Nós A*}) / \text{Nós Dijkstra} \times 100\).*
 
 ---
 
@@ -59,20 +59,17 @@ Este repositório contém todo o pipeline para:
 ```
 SmartRoute-OSM/
 │
-├─ data/                     # Arquivos gerados / estáticos
-│   ├─ quixada_drive.graphml  # Grafo viário (OSMnx)
-│   ├─ dijkstra_metrics.csv   # Métricas Dijkstra
-│   ├─ astar_metrics.csv      # Métricas A*
-│   ├─ dijkstra_visited_nodes.json
-│   ├─ astar_visited_nodes.json
-│   └─ astar_path.json        # Lista de nós da rota ótima
+├─ routing/                  # Código reutilizável: algoritmos de roteamento
+│   └─ algorithms.py         # Implementações Dijkstra e A* (Haversine)
+│
+├─ data/                     # Artefatos não versionados
 │
 └─ notebooks/
-    ├─ 01_data_extraction_osm.ipynb          # Baixa OSM, cria graphml
-    ├─ 02_dijkstra_implementation.ipynb     # Algoritmo Dijkstra + métricas
-    ├─ 03_astar_implementation.ipynb        # Algoritmo A* (Haversine) + métricas
-    ├─ 04_benchmark_and_folium_map.ipynb    # Tabela comparativa + gráficos + visualização da rota
-    └─ 05_spatial_analysis_extras.ipynb    # Isócronas, heatmap e visualizações avançadas
+    ├─ 01_data_extraction_osm.ipynb
+    ├─ 02_dijkstra_implementation.ipynb
+    ├─ 03_astar_implementation.ipynb
+    ├─ 04_benchmark_and_folium_map.ipynb
+    └─ 05_spatial_analysis_extras.ipynb
 ```
 
 ---
@@ -114,6 +111,33 @@ jupyter notebook
 ```
 
 Abra os notebooks em `notebooks/` **na ordem numérica** (`01_ → 05_`). Cada notebook contém explicações breves, código executável e comentários sobre como interpretar os resultados.
+
+## Scripts e módulo de roteamento
+
+Além dos notebooks, existe um módulo Python reutilizável em [routing/algorithms.py](C:/Users/cauae/Documents/SmartRoute-OSM/routing/algorithms.py) que contém implementações de Dijkstra e A* (heurística Haversine). Exemplos de uso:
+
+- Carregar o grafo GraphML e usar as funções:
+
+```python
+import networkx as nx
+from routing.algorithms import dijkstra, astar
+
+G = nx.read_graphml('data/quixada_drive.graphml')  # caminho relativo ao repositório
+start_node = ...   # id do nó de origem (int ou str conforme o graphml)
+target_node = ...  # id do nó de destino
+
+path, total_dist, nodes_visited = dijkstra(G, start_node, target_node)
+# ou
+path, total_dist, nodes_visited = astar(G, start_node, target_node)
+```
+
+- Exemplo rápido em linha de comando (Windows / cross-platform):
+
+```bash
+python -c "import networkx as nx; from routing.algorithms import dijkstra; G=nx.read_graphml('data/quixada_drive.graphml'); print(dijkstra(G, START, TARGET))"
+```
+
+Os resultados (rotas, métricas e mapas HTML) são gerados na pasta `data/` pelos notebooks; esses arquivos podem não estar versionados (veja `.gitignore`). Execute os notebooks na ordem para regenerar os artefatos.
 
 ---
 ## Referências
