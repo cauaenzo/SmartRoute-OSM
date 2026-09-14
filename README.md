@@ -179,7 +179,8 @@ SmartRoute-OSM/
 ## Quick Start
 
 ```bash
-git clone https://github.com/SEU_USUARIO/SmartRoute-OSM.git
+# Clone o repositório
+git clone https://github.com/cauaenzo/SmartRoute-OSM.git
 cd SmartRoute-OSM
 
 python -m venv venv
@@ -214,7 +215,9 @@ jupyter notebook
 ### OSMnx, Dados Abertos e Análise Espacial
 9. **Boeing, G. (2017).** *OSMnx: New methods for acquiring, constructing, analyzing, and visualizing complex street networks.* Computers, Environment and Urban Systems, 65, 126–139. https://doi.org/10.1016/j.compenvurbsys.2017.05.004
 10. **Boeing, G. (2020).** *A multi-scale analysis of 27,000 urban street networks: Every US city, town, and urbanized area.* Environment and Planning B: Urban Analytics and City Science, 48(4), 1–18. https://doi.org/10.1177/2399808320972353
-11. **OpenStreetMap Contributors. (2026).** *Planet dump.* https://planet.openstreetmap.org
+
+Resolving conflicts between develop and main and committing changes  develop
+1 conflicting file11. **OpenStreetMap Contributors. (2026).** *Planet dump.* https://planet.openstreetmap.org
 12. **Haklay, M., & Weber, P. (2008).** *OpenStreetMap: User-Generated Street Maps.* IEEE Pervasive Computing, 7(4), 12–18.
 
 ### Visualização e Análise Espacial em Python
@@ -232,7 +235,3 @@ jupyter notebook
 ## Licença
 
 Distribuído sob a licença **MIT** – sinta‑se livre para usar, modificar e redistribuir o código, desde que mantenha o aviso de copyright.
-
----
-
-> **Nota**: Este projeto tem fins educacionais e de demonstração de pipeline de engenharia de dados espaciais. Para aplicações de produção críticas, recomenda-se engines maduros (OSRM, Valhalla, GraphHopper) com *contraction hierarchies*, *customizable routing* e perfis de tráfego reais.
